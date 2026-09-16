@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Para ti 💗</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: linear-gradient(
+                to right,
+                #fce4ec,
+                #d696ac
+            );
+
+            font-family: Arial, sans-serif;
+
+            overflow: hidden;
+        }
+
+
+        .caja {
+
+            background: white;
+
+            width: 90%;
+
+            max-width: 420px;
+
+            padding: 35px;
+
+            border-radius: 40px;
+
+            text-align: center;
+
+            box-shadow:
+            0 0 20px
+            rgba(137, 41, 137, 0.5);
+
+            animation: aparecer 0.8s ease;
+        }
+
+
+        h1 {
+
+            color: #ad2259;
+
+        }
+
+
+        p {
+
+            color: #6a1b9a;
+
+            font-size: 17px;
+
+        }
+
+
+        button {
+
+            border: none;
+
+            padding: 15px 25px;
+
+            margin: 10px;
+
+            border-radius: 50px;
+
+            background: linear-gradient(
+                to right,
+                #d696ac,
+                #ee6d9a
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        button:hover {
+
+            transform: scale(1.08);
+
+            background: linear-gradient(
+                to right,
+                #821a40,
+                #ee6d9a
+            );
+
+        }
+
+
+        #mensaje {
+
+            margin-top: 20px;
+
+            color: #6a1b9a;
+
+            font-size: 18px;
+
+            min-height: 25px;
+
+        }
+
+
+        #confirmacion {
+
+            display: none;
+
+        }
+
+
+        #estadoMusica {
+
+            font-size: 13px;
+
+            margin-top: 15px;
+
+            color: #ad2259;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(0.9);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+
+            }
+
+        }
+
+
+        /* CORAZONES */
+
+
+        .corazon {
+
+            position: fixed;
+
+            bottom: -50px;
+
+            pointer-events: none;
+
+            animation: subir 5s linear forwards;
+
+        }
+
+
+        @keyframes subir {
+
+            from {
+
+                transform: translateY(0);
+
+                opacity: 1;
+
+            }
+
+            to {
+
+                transform: translateY(-110vh);
+
+                opacity: 0;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+<!-- PANTALLA PRINCIPAL -->
+
+
+<div class="caja" id="pregunta">
+
+
+    <h1>
+        Hola hermosa 💗
+    </h1>
+
+
+    <h1>
+        ¿Quieres salir conmigo?
+    </h1>
+
+
+    <button onclick="si()">
+
+        SÍ 💖
+
+    </button>
+
+
+    <button onclick="no()">
+
+        NO 😢
+
+    </button>
+
+
+    <div id="mensaje"></div>
+
+
+</div>
+
+
+
+<!-- CONFIRMACIÓN -->
+
+
+<div class="caja" id="confirmacion">
+
+
+    <h1>
+        Cita Confirmada 💖
+    </h1>
+
+
+    <p>
+        Prepárate para nuestra cita especial 🎁
+    </p>
+
+
+    <p>
+
+        <strong>
+            Hora:
+        </strong>
+
+        8:00 p.m.
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            Lugar:
+        </strong>
+
+        Mi Casa 🏠
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            No faltes 💗
+        </strong>
+
+    </p>
+
+
+    <div id="estadoMusica"></div>
+
+
+</div>
+
+
+
+<!-- MÚSICA DESDE GITHUB -->
+
+
+<audio
+    id="musica"
+    loop
+    preload="auto"
+>
+
+    <source
+        src="https://raw.githubusercontent.com/mairochar789-oss/amor/main/amor.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+
+<script>
+
+
+let contador = 0;
+
+
+
+/* =============================== */
+/* BOTÓN SÍ */
+/* =============================== */
+
+
+function si() {
+
+
+    document.getElementById("pregunta")
+    .style.display = "none";
+
+
+    document.getElementById("confirmacion")
+    .style.display = "block";
+
+
+    const musica =
+    document.getElementById("musica");
+
+
+    const estado =
+    document.getElementById("estadoMusica");
+
+
+    musica.volume = 1;
+
+
+    musica.play()
+
+    .then(function() {
+
+
+        estado.textContent =
+        "🎵";
+
+
+    })
+
+    .catch(function(error) {
+
+
+        estado.innerHTML =
+        `
+        No se pudo iniciar la música automáticamente.<br><br>
+
+        <button onclick="reproducirMusica()">
+            Reproducir música 🎵
+        </button>
+        `;
+
+
+        console.log(error);
+
+
+    });
+
+
+    iniciarCorazones();
+
+}
+
+
+
+/* =============================== */
+/* REPRODUCIR MÚSICA */
+/* =============================== */
+
+
+function reproducirMusica() {
+
+
+    const musica =
+    document.getElementById("musica");
+
+
+    musica.volume = 1;
+
+
+    musica.play();
+
+
+    document.getElementById(
+        "estadoMusica"
+    ).textContent = "🎵";
+
+
+}
+
+
+
+/* =============================== */
+/* BOTÓN NO */
+/* =============================== */
+
+
+function no() {
+
+
+    contador++;
+
+
+    const respuestas = [
+
+
+        "Yo sé que quieres 😏",
+
+
+        "Ya dime que sí 🙂",
+
+
+        "Hermosa, que sí 😚",
+
+
+        "Tú quieres 😘",
+
+
+        "Dale sí 🤗"
+
+
+    ];
+
+
+    document.getElementById(
+        "mensaje"
+    ).textContent =
+
+
+    respuestas[
+
+
+        Math.min(
+
+            contador - 1,
+
+            respuestas.length - 1
+
+        )
+
+
+    ];
+
+
+}
+
+
+
+/* =============================== */
+/* CORAZONES */
+/* =============================== */
+
+
+function iniciarCorazones() {
+
+
+    setInterval(function() {
+
+
+        const corazon =
+
+        document.createElement(
+            "div"
+        );
+
+
+        corazon.className =
+        "corazon";
+
+
+        const lista = [
+
+
+            "💗",
+
+            "💖",
+
+            "💕",
+
+            "💘",
+
+            "❤️"
+
+
+        ];
+
+
+        corazon.textContent =
+
+
+        lista[
+
+
+            Math.floor(
+
+                Math.random()
+                *
+                lista.length
+
+            )
+
+
+        ];
+
+
+        corazon.style.left =
+
+        Math.random() * 100
+        +
+        "vw";
+
+
+        corazon.style.fontSize =
+
+        (
+            20
+            +
+            Math.random() * 20
+        )
+
+        +
+        "px";
+
+
+        document.body.appendChild(
+            corazon
+        );
+
+
+        setTimeout(function() {
+
+
+            corazon.remove();
+
+
+        }, 5000);
+
+
+    }, 500);
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
